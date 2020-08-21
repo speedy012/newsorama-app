@@ -1,24 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Articles from './components/Articles'
 import './App.css';
 
-function App() {
+const App = () => {
+  const [search, setSearch] = useState('');
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+
+  const fetchData = (searchWord) => {
+    setIsLoading(true)
+    fetch(`http://newsapi.org/v2/everything?q=${searchWord}&apiKey=9152561a7d9f477eabb7741f4a904434`)
+     .then(res => res.json())
+     .then(res => setArticles(res.articles))
+     .catch(err => console.error(err))
+     .finally(() => setIsLoading(false))
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetchData(search);
+    setSearch('');
+  };
+
+  const removeArticle = (selectedArticle) => {
+    console.log(selectedArticle)
+    const filteredArticles = articles.filter(article => article.title !== selectedArticle.title)
+
+    setArticles(filteredArticles)
+  }
+
+
+console.log(articles)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2 className="title"> <strong>Newsorama</strong></h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Search News Article:
+          <input type="text" value={search} onChange={event => setSearch(event.target.value)}/>
+        </label>
+        <button type="submit" value="Submit" />
+      </form>
+      {isLoading ? <span>Loading</span> :<Articles articles={articles} removeArticle={removeArticle}/>}
     </div>
   );
 }
