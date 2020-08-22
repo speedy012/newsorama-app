@@ -19,7 +19,6 @@ const ArticleCard = (props) => {
     removeArticle(article)
   }
 
-
   return (
     <>
     <button className="article-card" onClick={openModal}>

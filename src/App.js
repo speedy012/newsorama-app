@@ -9,7 +9,7 @@ const App = () => {
 
   const fetchData = (searchWord) => {
     setIsLoading(true)
-    fetch(`/everything?q=${searchWord}&apiKey=9152561a7d9f477eabb7741f4a904434`)
+    fetch(`https://newsapi.org/v2/everything?q=${searchWord}&apiKey=9152561a7d9f477eabb7741f4a904434`)
      .then(res => res.json())
      .then(res => setArticles(res.articles))
      .catch(err => console.error(err))
@@ -25,14 +25,10 @@ const App = () => {
   };
 
   const removeArticle = (selectedArticle) => {
-    console.log(selectedArticle)
     const filteredArticles = articles.filter(article => article.title !== selectedArticle.title)
-
     setArticles(filteredArticles)
   }
 
-
-console.log(articles)
   return (
     <div className="App">
       <h2 className="title"> <strong>Newsorama</strong></h2>

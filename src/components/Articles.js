@@ -3,7 +3,6 @@ import ArticleCard from './ArticleCard'
 
 const Articles = (props) => {
 
-
   return (
     <div>
       <div className="articles-body">
