@@ -24,14 +24,6 @@ const App = () => {
     setSearch('');
   };
 
-  const removeArticle = (selectedArticle) => {
-
-    const filteredArticles = articles.filter(article => article.title !== selectedArticle.title)
-
-    setArticles(filteredArticles)
-  }
-
-
   return (
     <div className="App">
       <h2 className="title"> <strong>Newsorama</strong></h2>
@@ -42,7 +34,7 @@ const App = () => {
         </label>
         <button type="submit" value="Submit" />
       </form>
-      {isLoading ? <span>Loading</span> :<Articles articles={articles} removeArticle={removeArticle}/>}
+      {isLoading ? <span>Loading</span> :<Articles articles={articles}/>}
     </div>
   );
 }

@@ -14,10 +14,7 @@ const ArticleCard = (props) => {
     setIsOpen(false)
   }
 
-  const deleteArticleFromList = () => {
-    const { removeArticle, article } = props
-    removeArticle(article)
-  }
+
 
   return (
     <>
